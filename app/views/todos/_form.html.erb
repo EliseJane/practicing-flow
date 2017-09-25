@@ -14,13 +14,13 @@
 
     <div class="control-group">
       <%= label_tag :month %>
-      <%= select_tag :month, options_for_select(1..12, (@todo.duedate && @todo.duedate.month) || 1) %>
+      <%= select_tag :month, options_for_select(1..12, @todo.duedate.month) %>
 
       <%= label_tag :day %>
-      <%= select_tag :day, options_for_select(1..31, (@todo.duedate && @todo.duedate.day) || 1)%>
+      <%= select_tag :day, options_for_select(1..31, @todo.duedate.day) %>
 
       <%= label_tag :year %>
-      <%= select_tag :year, options_for_select(Time.now.year..2050, (@todo.duedate && @todo.duedate.year) || Time.now.year) %>
+      <%= select_tag :year, options_for_select(Time.now.year..2050, @todo.duedate.year) %>
     </div>
 
     <%= f.submit %>

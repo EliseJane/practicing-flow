@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:show, :edit, :update, :complete, :destroy]
+  before_action :set_todo, except: [:new, :index, :create]
 
   def index
     @complete = Todo.where(completed: true).sort_by &:duedate
@@ -11,6 +11,7 @@ class TodosController < ApplicationController
 
   def new
     @todo = Todo.new
+    @todo.duedate = Time.now
   end
 
   def create
