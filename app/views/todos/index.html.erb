@@ -1,11 +1,27 @@
 <h2>All Todos</h2>
 
 <ul>
-  <% @todos.each do |todo| %>
+  <% @incomplete.each do |todo| %>
     <li>
-      <%= format_date(todo.duedate) %>
+      <p>
+        <%= format_date(todo.duedate) %>
+        <br>
+        <%= todo.title %>
+      </p>
       <br/>
-      <%= todo.title %>
+      <%= link_to 'Show', todo_path(todo) %>
+      <%= link_to 'Edit', edit_todo_path(todo) %>
+
+    </li>
+  <% end %>
+
+  <% @complete.each do |todo| %>
+    <li>
+      <p style="text-decoration: line-through;">
+        <%= format_date(todo.duedate) %>
+        <br>
+        <%= todo.title %>
+      </p>
       <br/>
       <%= link_to 'Show', todo_path(todo) %>
       <%= link_to 'Edit', edit_todo_path(todo) %>
