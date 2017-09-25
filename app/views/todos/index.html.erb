@@ -1,0 +1,11 @@
+<h2>All Todos</h2>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <%= todo.duedate.strftime("%b %e, %Y") %>
+      <br/>
+      <%= todo.title %>
+    </li>
+  <% end %>
+</ul>
