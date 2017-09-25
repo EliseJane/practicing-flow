@@ -3,9 +3,13 @@
 <ul>
   <% @todos.each do |todo| %>
     <li>
-      <%= todo.duedate.strftime("%b %e, %Y") %>
+      <%= format_date(todo.duedate) %>
       <br/>
       <%= todo.title %>
+      <br/>
+      <%= link_to 'Show', todo_path(todo) %>
+      <%= link_to 'Edit', edit_todo_path(todo) %>
+
     </li>
   <% end %>
 </ul>
