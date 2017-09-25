@@ -16,13 +16,13 @@
 
     <div class="control-group">
       <%= label_tag :month %>
-      <%= select_tag :month, options_for_select(1..12) %>
+      <%= select_tag :month, options_for_select(1..12, @todo.duedate.month) %>
 
       <%= label_tag :day %>
-      <%= select_tag :day, options_for_select(1..31) %>
+      <%= select_tag :day, options_for_select(1..31, @todo.duedate.day) %>
 
       <%= label_tag :year %>
-      <%= select_tag :year, options_for_select(now..(now + 30)) %>
+      <%= select_tag :year, options_for_select(now..(now + 30), @todo.duedate.year) %>
     </div>
 
     <%= f.submit %>
