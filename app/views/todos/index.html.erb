@@ -4,32 +4,10 @@
 
 <ul>
   <% @incomplete.each do |todo| %>
-    <li>
-      <p>
-        <%= format_date(todo.duedate) %>
-        <br>
-        <%= todo.title %>
-      </p>
-      <br/>
-      <%= link_to 'Show', todo_path(todo) %>
-      <%= link_to 'Edit', edit_todo_path(todo) %>
-      <%= link_to 'Delete', todo_path(todo), method: :delete %>
-
-    </li>
+    <%= render 'todo_list', todo: todo %>
   <% end %>
 
   <% @complete.each do |todo| %>
-    <li>
-      <p style="text-decoration: line-through;">
-        <%= format_date(todo.duedate) %>
-        <br>
-        <%= todo.title %>
-      </p>
-      <br/>
-      <%= link_to 'Show', todo_path(todo) %>
-      <%= link_to 'Edit', edit_todo_path(todo) %>
-      <%= link_to 'Delete', todo_path(todo), method: :delete %>
-
-    </li>
+    <%= render 'todo_list', todo: todo %>
   <% end %>
 </ul>

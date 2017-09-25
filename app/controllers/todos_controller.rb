@@ -1,13 +1,12 @@
-require 'pry'
-
 class TodosController < ApplicationController
+  before_action :set_todo, only: [:show, :edit, :update, :complete, :destroy]
+
   def index
     @complete = Todo.where(completed: true).sort_by &:duedate
     @incomplete = Todo.where(completed: false).sort_by &:duedate
   end
 
   def show
-    @todo = Todo.find(params[:id])
   end
 
   def new
@@ -19,7 +18,7 @@ class TodosController < ApplicationController
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
 
     if @todo.save
-      flash[:notice] = 'A new todo was created.'
+      flash[:notice] = "#{@todo.title} was created."
       redirect_to todos_path
     else
       render :new
@@ -27,15 +26,13 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @todo = Todo.find(params[:id])
   end
 
   def update
-    @todo = Todo.find(params[:id])
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
-    
+
     if @todo.update(todo_params)
-      flash[:notice] = 'This todo was updated.'
+      flash[:notice] = "#{@todo.title} was updated."
       redirect_to todos_path
     else
       render :edit
@@ -43,10 +40,8 @@ class TodosController < ApplicationController
   end
 
   def complete
-    @todo = Todo.find(params[:id])
-
-    if @todo.update(completed: params[:completed])
-      flash[:notice] = 'This todo was marked completed.'
+    if @todo.update(completed: !@todo.completed)
+      flash[:notice] = "#{@todo.title} was updated."
       redirect_to todos_path
     else
       render :edit
@@ -54,8 +49,6 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    @todo = Todo.find(params[:id])
-
     if @todo.destroy
       flash[:notice] = "#{@todo.title} has been deleted."
       redirect_to todos_path
@@ -68,5 +61,9 @@ class TodosController < ApplicationController
 
   def todo_params
     params.require(:todo).permit!
+  end
+
+  def set_todo
+    @todo = Todo.find(params[:id])
   end
 end
