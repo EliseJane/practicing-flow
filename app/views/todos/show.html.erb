@@ -5,7 +5,4 @@
 
 <%= link_to 'Edit Todo', edit_todo_path(@todo) %>
 
-<%= @todo.completed %>
-
-
 <%= link_to 'Complete Todo', todo_path(@todo, completed: true), method: :patch %>
