@@ -19,6 +19,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
+    @todo.user = current_user
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
 
     if @todo.save

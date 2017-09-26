@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :todos
+  has_many :categories
 
   has_secure_password validations: false
   validates :username, presence: true, uniqueness: true

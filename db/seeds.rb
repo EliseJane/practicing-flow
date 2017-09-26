@@ -12,10 +12,16 @@ users = [
   ['Sunny', 'sunny@example.com', 'sunny']
 ]
 
+categories = [
+  ['Personal', 1], ['Work', 1], ['Family', 1],
+  ['Personal', 2], ['Work', 2], ['Family', 2],
+  ['Personal', 3], ['Work', 3], ['Family', 3],
+]
+
 todos = [
-  ['Clean Bathroom', 'some description', Date.new(2018, 7, 4), 1], 
-  ['Do Homework', 'some description', Date.new(2017, 11, 4), 2],
-  ['Wash Car', 'some description', Date.new(2016, 2, 4), 3],
+  ['Clean Bathroom', 'some description', Date.new(2018, 7, 4), 1, 1],
+  ['Do Homework', 'some description', Date.new(2017, 11, 4), 2, 1],
+  ['Wash Car', 'some description', Date.new(2016, 2, 4), 3, 1],
 ]
 
 
@@ -23,6 +29,10 @@ users.each do |username, email, password|
   User.create(username: username, email: email, password: password)
 end
 
-todos.each do |title, description, duedate, user_id|
-  Todo.create(title: title, description: description, duedate: duedate, user_id: user_id)
+categories.each do |category_name, user_id|
+  Category.create(name: category_name, user_id: user_id)
+end
+
+todos.each do |title, description, duedate, user_id, category_id|
+  Todo.create(title: title, description: description, duedate: duedate, user_id: user_id, category_id: category_id)
 end

@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :todos
 
   post '/todos/:id/complete', to: 'todos#toggle_complete'
+
+  resources :categories, only: [:show, :new, :create]
 end
