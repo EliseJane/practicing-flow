@@ -1,0 +1,13 @@
+<h2>All Todos</h2>
+
+<%= link_to 'Create New Todo', new_todo_path %>
+
+<ul>
+  <% @incomplete_todos.each do |todo| %>
+    <%= render 'todo_item', todo: todo %>
+  <% end %>
+
+  <% @completed_todos.each do |todo| %>
+    <%= render 'todo_item', todo: todo %>
+  <% end %>
+</ul>

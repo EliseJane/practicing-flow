@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+todos = [
+  ['Clean Bathroom', 'some description', Date.new(2018, 7, 4)],
+  ['Do Homework', 'some description', Date.new(2017, 11, 4)],
+  ['Wash Car', 'some description', Date.new(2016, 2, 4)],
+]
+
+todos.each do |title, description, duedate|
+  Todo.create(title: title, description: description, duedate: duedate)
+end

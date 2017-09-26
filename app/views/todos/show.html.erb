@@ -1,0 +1,10 @@
+<%= link_to 'See All Todos', todos_path %>
+
+<h2 style="<%= completed_todo_style(@todo) %>"><%= @todo.title %></h2>
+
+<p><%= @todo.description %></p>
+<p>Due on: <%= format_date(@todo.duedate) %> </p>
+
+<%= link_to 'Edit Todo', edit_todo_path(@todo) %>
+
+<%= link_to (@todo.completed? ? 'Mark Incomplete' : 'Complete Todo'), url_for(controller: 'todos', action: 'toggle_complete'), method: :post %>
