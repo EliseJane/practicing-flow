@@ -1,9 +1,12 @@
 class TodosController < ApplicationController
   before_action :set_todo, except: [:new, :index, :create]
+  before_action :require_user, except: [:index]
 
   def index
-    @completed_todos = Todo.where(completed: true).order(:duedate)
-    @incomplete_todos = Todo.where(completed: false).order(:duedate)
+    if logged_in?
+      @completed_todos = Todo.where(completed: true, user_id: current_user.id).order(:duedate)
+      @incomplete_todos = Todo.where(completed: false, user_id: current_user.id).order(:duedate)
+    end
   end
 
   def show

@@ -1,22 +1,17 @@
+<%= render 'shared/nav' %>
+
 <% if logged_in? %>
-  <p style="float:right;">Hi <%= current_user.username %></p>
   <%= link_to 'Create New Todo', new_todo_path %>
-  <%= link_to 'Log out', logout_path %>
-<% else %>
-  <div>
-    <%= link_to 'Log in', login_path %>
-    <%= link_to 'Register', register_path %>
-  </div>
+
+  <h2>All Todos</h2>
+
+  <ul>
+    <% @incomplete_todos.each do |todo| %>
+      <%= render 'todo_item', todo: todo %>
+    <% end %>
+
+    <% @completed_todos.each do |todo| %>
+      <%= render 'todo_item', todo: todo %>
+    <% end %>
+  </ul>
 <% end %>
-
-<h2>All Todos</h2>
-
-<ul>
-  <% @incomplete_todos.each do |todo| %>
-    <%= render 'todo_item', todo: todo %>
-  <% end %>
-
-  <% @completed_todos.each do |todo| %>
-    <%= render 'todo_item', todo: todo %>
-  <% end %>
-</ul>
