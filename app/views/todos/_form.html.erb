@@ -23,6 +23,9 @@
       <%= select_tag :year, options_for_select(Time.now.year..2050, @todo.duedate.year) %>
     </div>
 
+    <%= f.label :category %>
+    <%= select :category, :name, current_user.categories.map(&:name) %>
+
     <%= f.submit %>
   <% end %>
 </div>

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, except: [:new, :create]
   before_action :require_user, except: [:new, :create]
   before_action :require_same_user, except: [:new, :create]
 
@@ -19,20 +20,28 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
+    if @user.update(user_params)
+      flash[:notice] = 'Your profile has been updated'
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
   def require_same_user

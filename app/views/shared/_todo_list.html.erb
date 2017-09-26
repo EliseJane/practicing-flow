@@ -1,0 +1,9 @@
+<ul>
+  <% @incomplete_todos.each do |todo| %>
+    <%= render 'shared/todo_item', todo: todo %>
+  <% end %>
+
+  <% @completed_todos.each do |todo| %>
+    <%= render 'shared/todo_item', todo: todo %>
+  <% end %>
+</ul>

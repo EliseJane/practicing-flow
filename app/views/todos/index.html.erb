@@ -4,13 +4,5 @@
 
   <h2>All Todos</h2>
 
-  <ul>
-    <% @incomplete_todos.each do |todo| %>
-      <%= render 'todo_item', todo: todo %>
-    <% end %>
-
-    <% @completed_todos.each do |todo| %>
-      <%= render 'todo_item', todo: todo %>
-    <% end %>
-  </ul>
+  <%= render 'shared/todo_list' %>
 <% end %>
