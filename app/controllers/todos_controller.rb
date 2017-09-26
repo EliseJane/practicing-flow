@@ -2,8 +2,8 @@ class TodosController < ApplicationController
   before_action :set_todo, except: [:new, :index, :create]
 
   def index
-    @complete = Todo.where(completed: true).sort_by &:duedate
-    @incomplete = Todo.where(completed: false).sort_by &:duedate
+    @completed_todos = Todo.where(completed: true).order(:duedate)
+    @incomplete_todos = Todo.where(completed: false).order(:duedate)
   end
 
   def show
@@ -40,7 +40,7 @@ class TodosController < ApplicationController
     end
   end
 
-  def complete
+  def toggle_complete
     if @todo.update(completed: !@todo.completed)
       flash[:notice] = "#{@todo.title} was updated."
       redirect_to todos_path

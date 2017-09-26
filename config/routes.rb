@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   resources :todos
 
-  post '/todos/:id/complete', to: 'todos#complete'
+  post '/todos/:id/complete', to: 'todos#toggle_complete'
 end

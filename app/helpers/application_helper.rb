@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def completed_todo_style(todo)
-    'text-decoration: line-through;' if todo.completed
+    'text-decoration: line-through;' if todo.completed?
   end
 end

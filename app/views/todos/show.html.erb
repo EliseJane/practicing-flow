@@ -7,4 +7,4 @@
 
 <%= link_to 'Edit Todo', edit_todo_path(@todo) %>
 
-<%= link_to (@todo.completed ? 'Mark Incomplete' : 'Complete Todo'), url_for(controller: 'todos', action: 'complete'), method: :post %>
+<%= link_to (@todo.completed? ? 'Mark Incomplete' : 'Complete Todo'), url_for(controller: 'todos', action: 'toggle_complete'), method: :post %>
