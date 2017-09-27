@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   before_action :set_todo, except: [:new, :index, :create]
   before_action :require_user, except: [:index]
+  before_action :require_same_user, only: [:edit, :show, :update, :destroy, :toggle_complete]
 
   def index
     if logged_in?
@@ -71,5 +72,14 @@ class TodosController < ApplicationController
 
   def set_todo
     @todo = Todo.find(params[:id])
+  end
+
+  def require_same_user
+    user = @todo.user
+
+    if user != current_user
+      flash[:notice] = "Can't do that"
+      redirect_to root_path
+    end
   end
 end
