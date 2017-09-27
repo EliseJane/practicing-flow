@@ -22,8 +22,8 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     @todo.user = current_user
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
-    @todo.category = Category.find_by(name: params[:category][:name])
-
+    @todo.category = Category.find_by(name: params[:category][:name]) if params[:category]
+  
     if @todo.save
       flash[:notice] = "#{@todo.title} was created."
       redirect_to todos_path
@@ -37,6 +37,7 @@ class TodosController < ApplicationController
 
   def update
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
+    @todo.category = Category.find_by(name: params[:category][:name]) if params[:category]
 
     if @todo.update(todo_params)
       flash[:notice] = "#{@todo.title} was updated."

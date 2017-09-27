@@ -3,8 +3,10 @@
     <%= format_date(todo.duedate) %>
     <br>
     <%= todo.title %>
-    <br>
-    Category: <%= link_to todo.category.name, category_path(todo.category) %>
+    <% unless todo.category.nil? %>
+      <br>
+      Category: <%= link_to todo.category.name, category_path(todo.category) %>
+    <% end %>
   </p>
   <br/>
   <%= link_to 'Show', todo_path(todo) %>

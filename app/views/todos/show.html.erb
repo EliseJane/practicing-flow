@@ -2,9 +2,11 @@
 
 <p><%= @todo.description %></p>
 <p>Due on: <%= format_date(@todo.duedate) %> </p>
-<p>
-  Category: <%= link_to @todo.category.name, category_path(@todo.category) %>
-</p>
+<% unless @todo.category.nil? %>
+  <p>
+    Category: <%= link_to @todo.category.name, category_path(@todo.category) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit Todo', edit_todo_path(@todo) %>
 

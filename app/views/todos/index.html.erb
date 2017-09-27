@@ -3,9 +3,12 @@
   <%= link_to 'Create New Category', new_category_path %>
 
   <h2>All Todos</h2>
-  <strong>Categories:</strong>
-  <% current_user.categories.each do |category| %>
-    <%= link_to category.name, category_path(category) %>
+
+  <% if current_user.categories.any? %>
+    <strong>Categories:</strong>
+    <% current_user.categories.each do |category| %>
+      <%= link_to category.name, category_path(category) %>
+    <% end %>
   <% end %>
 
   <%= render 'shared/todo_list' %>
