@@ -1,9 +1,13 @@
 class TodosController < ApplicationController
   before_action :set_todo, except: [:new, :index, :create]
+  before_action :require_user, except: [:index]
+  before_action :require_same_user, only: [:edit, :show, :update, :destroy, :toggle_complete]
 
   def index
-    @completed_todos = Todo.where(completed: true).order(:duedate)
-    @incomplete_todos = Todo.where(completed: false).order(:duedate)
+    if logged_in?
+      @completed_todos = Todo.where(completed: true, user_id: current_user.id).order(:duedate)
+      @incomplete_todos = Todo.where(completed: false, user_id: current_user.id).order(:duedate)
+    end
   end
 
   def show
@@ -16,6 +20,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
+    @todo.user = current_user
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
 
     if @todo.save
@@ -31,6 +36,7 @@ class TodosController < ApplicationController
 
   def update
     @todo.duedate = Time.new(params[:year], params[:month], params[:day])
+    @todo.category = Category.find_by(name: params[:category][:name]) if params[:category]
 
     if @todo.update(todo_params)
       flash[:notice] = "#{@todo.title} was updated."
@@ -66,5 +72,14 @@ class TodosController < ApplicationController
 
   def set_todo
     @todo = Todo.find(params[:id])
+  end
+
+  def require_same_user
+    user = @todo.user
+
+    if user != current_user
+      flash[:notice] = "Can't do that"
+      redirect_to root_path
+    end
   end
 end

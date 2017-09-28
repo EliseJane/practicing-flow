@@ -1,9 +1,12 @@
-<%= link_to 'See All Todos', todos_path %>
-
 <h2 style="<%= completed_todo_style(@todo) %>"><%= @todo.title %></h2>
 
 <p><%= @todo.description %></p>
 <p>Due on: <%= format_date(@todo.duedate) %> </p>
+<% unless @todo.category.nil? %>
+  <p>
+    Category: <%= link_to @todo.category.name, category_path(@todo.category) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit Todo', edit_todo_path(@todo) %>
 

@@ -1,0 +1,13 @@
+<% if logged_in? %>
+  <p style="float:right;">Hi <%= current_user.username %></p>
+  <%= link_to 'All Todos', root_path %>
+  <div>
+    <%= link_to 'Log out', logout_path %>
+    <%= link_to 'View Profile', user_path(current_user) %>
+  </div>
+<% else %>
+  <div>
+    <%= link_to 'Log in', login_path %>
+    <%= link_to 'Register', register_path %>
+  </div>
+<% end %>

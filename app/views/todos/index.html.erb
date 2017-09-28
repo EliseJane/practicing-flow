@@ -1,13 +1,15 @@
-<h2>All Todos</h2>
+<% if logged_in? %>
+  <%= link_to 'Create New Todo', new_todo_path %>
+  <%= link_to 'Create New Category', new_category_path %>
 
-<%= link_to 'Create New Todo', new_todo_path %>
+  <h2>All Todos</h2>
 
-<ul>
-  <% @incomplete_todos.each do |todo| %>
-    <%= render 'todo_item', todo: todo %>
+  <% if current_user.categories.any? %>
+    <strong>Categories:</strong>
+    <% current_user.categories.each do |category| %>
+      <%= link_to category.name, category_path(category) %>
+    <% end %>
   <% end %>
 
-  <% @completed_todos.each do |todo| %>
-    <%= render 'todo_item', todo: todo %>
-  <% end %>
-</ul>
+  <%= render 'shared/todo_list' %>
+<% end %>

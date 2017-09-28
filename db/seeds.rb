@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+users = [
+  ['El', 'el@example.com', 'el'],
+  ['Nitin', 'nitin@example.com', 'nitin'],
+  ['Sunny', 'sunny@example.com', 'sunny']
+]
+
+categories = ['Personal', 'Work', 'Family']
 
 todos = [
   ['Clean Bathroom', 'some description', Date.new(2018, 7, 4)],
@@ -12,6 +12,19 @@ todos = [
   ['Wash Car', 'some description', Date.new(2016, 2, 4)],
 ]
 
-todos.each do |title, description, duedate|
-  Todo.create(title: title, description: description, duedate: duedate)
+users.each do |username, email, password|
+  User.create(username: username, email: email, password: password)
+end
+
+category_id = 1
+
+(1..users.size).each do |user_id|
+  categories.each do |category_name|
+    Category.create(name: category_name, user_id: user_id)
+  end
+
+  todos.each do |title, description, duedate|
+    Todo.create(title: title, description: description, duedate: duedate, user_id: user_id, category_id: category_id)
+    category_id += 1
+  end
 end

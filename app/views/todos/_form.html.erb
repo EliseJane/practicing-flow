@@ -1,4 +1,4 @@
-<%= render 'errors', obj: @todo %>
+<%= render 'shared/errors', obj: @todo %>
 
 <div class="span8 well">
   <%= form_for @todo do |f| %>
@@ -22,6 +22,11 @@
       <%= label_tag :year %>
       <%= select_tag :year, options_for_select(Time.now.year..2050, @todo.duedate.year) %>
     </div>
+
+    <% if current_user.categories.any? %>
+      <%= f.label :category %>
+      <%= f.select :category_id, current_user.categories.collect { |p| [ p.name, p.id ] }, include_blank: true %>
+    <% end %>
 
     <%= f.submit %>
   <% end %>
