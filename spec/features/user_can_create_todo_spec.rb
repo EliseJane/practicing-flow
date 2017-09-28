@@ -11,13 +11,13 @@ RSpec.feature "user can create todo", :type => :feature do
     fill_in(:password, with: 'alice')
     click_button('Log in')
 
-    expect(page).to have_content('Create New Todo')
+    expect(page).to have_link('Create New Todo')
   end
 
   scenario "does not display create todo link when used isn't logged in" do
     visit(todos_path)
 
-    expect(page).to_not have_content('Create New Todo')
+    expect(page).to_not have_link('Create New Todo')
   end
 
   scenario "new todo form loaded when user clicks create new todo" do
@@ -47,5 +47,4 @@ RSpec.feature "user can create todo", :type => :feature do
 
     expect(page).to have_content('clean')
   end
-
 end
