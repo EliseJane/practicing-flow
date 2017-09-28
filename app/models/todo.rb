@@ -10,4 +10,11 @@ class Todo < ActiveRecord::Base
     end
     title
   end
+
+  def self.due_today
+    tomorrow = 1.day.since
+    today = Time.now
+
+    Todo.where("duedate < ? AND duedate >= ?", "#{tomorrow}", "#{today}").order(:duedate).to_a
+  end
 end
