@@ -2,7 +2,8 @@
   <% @incomplete_todos.each do |todo| %>
     <%= render 'shared/todo_item', todo: todo %>
   <% end %>
-
+</ul>
+<ul id='complete'>
   <% @completed_todos.each do |todo| %>
     <%= render 'shared/todo_item', todo: todo %>
   <% end %>
